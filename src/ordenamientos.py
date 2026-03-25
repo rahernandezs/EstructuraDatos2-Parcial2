@@ -3,15 +3,14 @@ def quick_sort(arr, key=lambda x: x, reverse=False):
         return arr
 
     pivote = arr[0]
+    menores = [x for x in arr[1:] if key(x) < key(pivote)]
+    iguales = [x for x in arr if key(x) == key(pivote)]
+    mayores = [x for x in arr[1:] if key(x) > key(pivote)]
 
     if reverse:
-        menores = [x for x in arr[1:] if key(x) > key(pivote)]
-        mayores = [x for x in arr[1:] if key(x) <= key(pivote)]
+        return quick_sort(mayores, key, reverse) + iguales + quick_sort(menores, key, reverse)
     else:
-        menores = [x for x in arr[1:] if key(x) < key(pivote)]
-        mayores = [x for x in arr[1:] if key(x) >= key(pivote)]
-
-    return quick_sort(menores, key, reverse) + [pivote] + quick_sort(mayores, key, reverse)
+        return quick_sort(menores, key, reverse) + iguales + quick_sort(mayores, key, reverse)
 
 
 def merge_sort(arr, key=lambda x: x, reverse=False):
@@ -26,28 +25,20 @@ def merge_sort(arr, key=lambda x: x, reverse=False):
 
 
 def merge(left, right, key, reverse):
-    result = []
+    resultado = []
     i = j = 0
 
     while i < len(left) and j < len(right):
-        if reverse:
-            if key(left[i]) > key(right[j]):
-                result.append(left[i])
-                i += 1
-            else:
-                result.append(right[j])
-                j += 1
+        if (key(left[i]) < key(right[j]) and not reverse) or (key(left[i]) > key(right[j]) and reverse):
+            resultado.append(left[i])
+            i += 1
         else:
-            if key(left[i]) < key(right[j]):
-                result.append(left[i])
-                i += 1
-            else:
-                result.append(right[j])
-                j += 1
+            resultado.append(right[j])
+            j += 1
 
-    result.extend(left[i:])
-    result.extend(right[j:])
-    return result
+    resultado.extend(left[i:])
+    resultado.extend(right[j:])
+    return resultado
 
 
 def insertion_sort(arr, key=lambda x: x, reverse=False):
@@ -57,9 +48,7 @@ def insertion_sort(arr, key=lambda x: x, reverse=False):
         actual = arr[i]
         j = i - 1
 
-        while j >= 0 and (
-            (key(arr[j]) < key(actual) if reverse else key(arr[j]) > key(actual))
-        ):
+        while j >= 0 and ((key(arr[j]) > key(actual) and not reverse) or (key(arr[j]) < key(actual) and reverse)):
             arr[j + 1] = arr[j]
             j -= 1
 

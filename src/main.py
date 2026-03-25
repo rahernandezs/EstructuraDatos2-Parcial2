@@ -6,65 +6,72 @@ from busquedas import busqueda_binaria, busqueda_lineal_nombre
 
 productos = generar_productos()
 
-# ---------------- ORDENAMIENTO ----------------
+print("Cantidad de productos:", len(productos))
+
+
+# =========================
+# ORDENAMIENTOS
+# =========================
+
+def medir_tiempo(func, *args, repeticiones=5):
+    tiempos = []
+    for _ in range(repeticiones):
+        inicio = time.time()
+        func(*args)
+        fin = time.time()
+        tiempos.append(fin - inicio)
+    return sum(tiempos) / len(tiempos)
+
 
 print("\n--- ORDENAMIENTO POR PRECIO (ASCENDENTE) ---")
-
-for nombre, algoritmo in [
-    ("Quick Sort", quick_sort),
-    ("Merge Sort", merge_sort),
-    ("Insertion Sort", insertion_sort)
-]:
-    inicio = time.time()
-    algoritmo(productos.copy(), key=lambda x: x.precio)
-    fin = time.time()
-    print(f"{nombre}: {fin - inicio}")
+print("Quick Sort:", medir_tiempo(quick_sort, productos.copy(), lambda x: x.precio))
+print("Merge Sort:", medir_tiempo(merge_sort, productos.copy(), lambda x: x.precio))
+print("Insertion Sort:", medir_tiempo(insertion_sort, productos.copy(), lambda x: x.precio))
 
 
 print("\n--- ORDENAMIENTO POR CALIFICACION (DESCENDENTE) ---")
-
-for nombre, algoritmo in [
-    ("Quick Sort", quick_sort),
-    ("Merge Sort", merge_sort),
-    ("Insertion Sort", insertion_sort)
-]:
-    inicio = time.time()
-    algoritmo(productos.copy(), key=lambda x: x.calificacion_promedio, reverse=True)
-    fin = time.time()
-    print(f"{nombre}: {fin - inicio}")
+print("Quick Sort:", medir_tiempo(quick_sort, productos.copy(), lambda x: x.calificacionPromedio, True))
+print("Merge Sort:", medir_tiempo(merge_sort, productos.copy(), lambda x: x.calificacionPromedio, True))
+print("Insertion Sort:", medir_tiempo(insertion_sort, productos.copy(), lambda x: x.calificacionPromedio, True))
 
 
-# ---------------- BUSQUEDAS ----------------
+# =========================
+# BUSQUEDAS
+# =========================
 
-print("\n--- BUSQUEDA BINARIA ---")
+productos_ordenados = sorted(productos, key=lambda x: x.id)
 
-productos_id = sorted(productos, key=lambda x: x.id)
-
+# IDs existentes
 ids_existentes = random.sample(range(1, 51), 10)
-ids_no_existentes = [random.randint(51, 100) for _ in range(10)]
+
+# IDs inexistentes
+ids_inexistentes = [random.randint(100, 200) for _ in range(10)]
 
 inicio = time.time()
 
 for i in ids_existentes:
-    busqueda_binaria(productos_id, i)
+    busqueda_binaria(productos_ordenados, i)
 
-for i in ids_no_existentes:
-    busqueda_binaria(productos_id, i)
+for i in ids_inexistentes:
+    busqueda_binaria(productos_ordenados, i)
 
 fin = time.time()
 
-print("Tiempo total:", fin - inicio)
+print("\nBusqueda binaria (20 pruebas):", fin - inicio)
 
 
-print("\n--- BUSQUEDA POR NOMBRE ---")
-
-subcadenas = ["lap", "cam", "tec", "xyz", "abc"]
+# BÚSQUEDA POR NOMBRE
+subcadenas_existentes = ["lap", "cam", "lib", "tec", "mon", "bal", "sil", "mou", "top", "cla"]
+subcadenas_inexistentes = ["zzz", "xxx", "qqq", "yyy", "abc", "def", "ghi", "nop", "rst", "uvw"]
 
 inicio = time.time()
 
-for s in subcadenas:
+for s in subcadenas_existentes:
+    busqueda_lineal_nombre(productos, s)
+
+for s in subcadenas_inexistentes:
     busqueda_lineal_nombre(productos, s)
 
 fin = time.time()
 
-print("Tiempo total:", fin - inicio)
+print("Busqueda por nombre (20 pruebas):", fin - inicio)
