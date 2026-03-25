@@ -1,12 +1,12 @@
-# 📊 Parcial 2 - Estructura de Datos II
+# Parcial 2 - Estructura de Datos II
 
-## 🧠 Proyecto: Rendimiento con Algoritmos de Ordenamiento y Búsqueda en Datos Reales
+## Proyecto: Rendimiento con Algoritmos de Ordenamiento y Búsqueda en Datos Reales
 
 Este proyecto desarrolla un módulo para la gestión de productos en una tienda en línea, enfocado en analizar el rendimiento de algoritmos de ordenamiento y búsqueda aplicados sobre objetos complejos.
 
 ---
 
-## 🎯 Objetivos
+## Objetivos
 
 - Modelar productos con atributos reales.
 - Implementar algoritmos de ordenamiento sobre objetos.
@@ -16,7 +16,7 @@ Este proyecto desarrolla un módulo para la gestión de productos en una tienda 
 
 ---
 
-## 🧱 Estructura del Proyecto
+## Estructura del Proyecto
 
 ```
 src/
@@ -29,18 +29,18 @@ src/
 
 ---
 
-## ⚙️ Funcionalidades
+## Funcionalidades
 
 - Generación de 50 productos con datos aleatorios coherentes
 - Ordenamiento por precio (ascendente)
 - Ordenamiento por calificación (descendente)
 
-### Algoritmos de ordenamiento implementados:
+Algoritmos de ordenamiento implementados:
 - Quick Sort
 - Merge Sort
 - Insertion Sort
 
-### Algoritmos de búsqueda:
+Algoritmos de búsqueda:
 - Búsqueda binaria por ID
 - Búsqueda lineal por nombre (subcadena)
 
@@ -48,7 +48,7 @@ src/
 
 ---
 
-## 🚀 Ejecución
+## Ejecución
 
 1. Abrir terminal en la carpeta `src`
 2. Ejecutar:
@@ -59,7 +59,7 @@ python main.py
 
 ---
 
-## 📈 Resultados
+## Resultados
 
 - Quick Sort suele ser el más rápido en la práctica.
 - Merge Sort mantiene estabilidad en el rendimiento.
@@ -72,15 +72,15 @@ En búsquedas:
 
 ---
 
-## 🧠 Conclusiones
+## Conclusiones
 
 - El rendimiento depende del algoritmo y del tipo de datos.
 - Los algoritmos O(n log n) son ideales para ordenamiento eficiente.
 - La búsqueda binaria es óptima para claves únicas ordenadas.
-- Para búsquedas de texto, en sistemas reales se usan estructuras más avanzadas como índices o árboles de prefijos.
+- Para búsquedas de texto, en sistemas reales se usan estructuras más avanzadas.
 
 ---
 
-## 👨‍💻 Autor
+## Autor
 
 Rances Hernandez
